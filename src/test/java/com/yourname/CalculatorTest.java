@@ -7,7 +7,7 @@ public class CalculatorTest {
         double result =0;
         switch(op){
             case "+":
-                result = num1 + num2; //BUG
+                result = num1 - num2; //BUG
                 break;
             case "-":
                 result = num1 - num2;
