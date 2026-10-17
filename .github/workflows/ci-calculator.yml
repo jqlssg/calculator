@@ -1,0 +1,41 @@
+# Name of this GitHub Actions workflow, shown on the Actions page
+name: Calculator CI
+
+# Trigger rules: run on push to main AND pull requests targeting main
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    # Runner environment: latest Ubuntu virtual machine
+    runs-on: ubuntu-latest
+
+    # Build matrix: run the whole job in parallel on JDK 17 and JDK 21 (Bonus Task 4)
+    strategy:
+      matrix:
+        java-version: [ '17', '21' ]
+
+    steps:
+      # Step 1: checkout the repository source code
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      # Step 2: set up the matching JDK version for this matrix entry
+      - name: Set up JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ matrix.java-version }}
+          distribution: 'temurin'
+          # Cache Maven dependencies to speed up repeated builds
+          cache: maven
+
+      # Step 3: compile all Java source files
+      - name: Compile Java source code
+        run: mvn clean compile
+
+      # Step 4: run all JUnit 5 unit tests from Lab4
+      - name: Run all JUnit test cases
+        run: mvn test
