@@ -6,7 +6,7 @@ public class Calculator {
         double res;
         switch (op) {
             case "+":
-                res = num1 + num2;
+                res = num1 - num2;
                 
                 break;
             case "-":
