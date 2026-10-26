@@ -12,7 +12,7 @@ COPY src ./src
 RUN mvn package -DskipTests=false
 
 # Second stage: Amazon corretto jre as runtime
-FROM amazoncorretto:17-al2-jre
+FROM amazoncorretto:17-al2
 # Set working directory for runtime container
 WORKDIR /app
 # Copy the built jar file from builder stage to runtime container
