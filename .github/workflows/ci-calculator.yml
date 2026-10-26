@@ -39,3 +39,5 @@ jobs:
       # Step 4: run all JUnit 5 unit tests from Lab4
       - name: Run all JUnit test cases
         run: mvn test
+      - name: Build Docker image
+        run: docker build -t calculator:v1 .
