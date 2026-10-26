@@ -11,11 +11,12 @@ COPY src ./src
 # Compile project, run unit tests and generate jar package
 RUN mvn package -DskipTests=false
 
-# Second stage: lightweight runtime environment
-FROM openjdk:17-jre-slim
+# Second stage: Amazon corretto jre as runtime
+FROM amazoncorretto:17-al2-jre
 # Set working directory for runtime container
 WORKDIR /app
 # Copy the built jar file from builder stage to runtime container
 COPY --from=builder /app/target/calculator-1.0-SNAPSHOT.jar app.jar
 # Command to start the calculator application
 ENTRYPOINT ["java","-jar","app.jar"]
+
