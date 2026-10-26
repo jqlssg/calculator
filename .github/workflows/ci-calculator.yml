@@ -39,5 +39,9 @@ jobs:
       # Step 4: run all JUnit 5 unit tests from Lab4
       - name: Run all JUnit test cases
         run: mvn test
+        
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Build Docker image
         run: docker build -t calculator:v1 .
